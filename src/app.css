@@ -1,0 +1,286 @@
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	--max-width: 640px;
+	--color-text: #111;
+	--color-muted: #666;
+	--color-border: #ddd;
+	--color-bg: #fff;
+}
+
+html {
+	font-family: var(--font);
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--color-text);
+	background: var(--color-bg);
+}
+
+body {
+	padding: 0 1rem;
+}
+
+.site {
+	max-width: var(--max-width);
+	margin: 0 auto;
+}
+
+/* Navigation */
+header {
+	border-bottom: 1px solid var(--color-border);
+	padding: 1rem 0;
+	margin-bottom: 2rem;
+}
+
+nav {
+	display: flex;
+	align-items: baseline;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+}
+
+.site-title {
+	font-weight: 600;
+	font-size: 1rem;
+	text-decoration: none;
+	color: var(--color-text);
+	margin-right: auto;
+}
+
+.nav-links {
+	display: flex;
+	align-items: baseline;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+nav a, .nav-links a {
+	color: var(--color-text);
+	text-decoration: none;
+	font-size: 0.9rem;
+}
+
+nav a:hover, .nav-links a:hover {
+	text-decoration: underline;
+}
+
+/* Typography */
+h1 {
+	font-size: 1.4rem;
+	font-weight: 600;
+	margin-bottom: 1.5rem;
+}
+
+h2 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+}
+
+p {
+	margin-bottom: 0.75rem;
+	color: var(--color-muted);
+}
+
+/* Lists */
+ul, ol {
+	list-style: none;
+}
+
+/* Forms */
+form {
+	display: contents;
+}
+
+label {
+	display: block;
+	font-size: 0.875rem;
+	margin-bottom: 0.25rem;
+	color: var(--color-muted);
+}
+
+input, textarea, select {
+	display: block;
+	width: 100%;
+	padding: 0.4rem 0.5rem;
+	border: 1px solid var(--color-border);
+	border-radius: 0;
+	font-family: var(--font);
+	font-size: 1rem;
+	color: var(--color-text);
+	background: var(--color-bg);
+	appearance: auto;
+}
+
+input:focus, textarea:focus, select:focus {
+	outline: 2px solid var(--color-text);
+	outline-offset: 0;
+}
+
+textarea {
+	resize: vertical;
+	min-height: 6rem;
+}
+
+/* Buttons */
+button, .button {
+	display: inline-block;
+	padding: 0.4rem 0.9rem;
+	border: 1px solid var(--color-text);
+	background: var(--color-text);
+	color: var(--color-bg);
+	font-family: var(--font);
+	font-size: 0.9rem;
+	cursor: pointer;
+	text-decoration: none;
+	border-radius: 0;
+	line-height: 1.5;
+}
+
+button:hover, .button:hover {
+	opacity: 0.8;
+}
+
+button.secondary, .button.secondary {
+	background: transparent;
+	color: var(--color-text);
+}
+
+button.danger, .button.danger {
+	background: transparent;
+	color: var(--color-text);
+	border-color: var(--color-border);
+	font-size: 0.85rem;
+}
+
+/* Form layout */
+.form-group {
+	margin-bottom: 1rem;
+}
+
+.form-actions {
+	margin-top: 1.5rem;
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.error {
+	color: #c00;
+	font-size: 0.875rem;
+	margin-top: 0.25rem;
+}
+
+.form-error {
+	color: #c00;
+	font-size: 0.875rem;
+	margin-bottom: 1rem;
+}
+
+/* Concert / venue lists */
+.list {
+	border-top: 1px solid var(--color-border);
+}
+
+.list-item {
+	border-bottom: 1px solid var(--color-border);
+	padding: 0.75rem 0;
+}
+
+.list-item a {
+	text-decoration: none;
+	color: var(--color-text);
+}
+
+.list-item a:hover {
+	text-decoration: underline;
+}
+
+.list-item .meta {
+	font-size: 0.85rem;
+	color: var(--color-muted);
+}
+
+/* Detail page */
+.detail-meta {
+	font-size: 0.9rem;
+	color: var(--color-muted);
+	margin-bottom: 1.5rem;
+}
+
+.detail-meta p {
+	margin-bottom: 0.25rem;
+}
+
+.section {
+	margin-top: 2rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--color-border);
+}
+
+/* Action row */
+.action-row {
+	margin-bottom: 1.5rem;
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+/* Attendance */
+.attendance-status {
+	font-size: 0.9rem;
+	margin-bottom: 1rem;
+}
+
+.attendance-actions {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+/* Empty state */
+.empty {
+	color: var(--color-muted);
+	font-size: 0.9rem;
+	padding: 0.75rem 0;
+}
+
+/* Page sections */
+.page-header {
+	margin-bottom: 1.5rem;
+	display: flex;
+	align-items: baseline;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.page-header h1 {
+	margin-bottom: 0;
+}
+
+/* Two-column attendee lists */
+.attendee-cols {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+	margin-top: 1rem;
+}
+
+@media (max-width: 400px) {
+	.attendee-cols {
+		grid-template-columns: 1fr;
+	}
+}
+
+.attendee-list li {
+	font-size: 0.9rem;
+	padding: 0.2rem 0;
+	border-bottom: 1px solid var(--color-border);
+}
