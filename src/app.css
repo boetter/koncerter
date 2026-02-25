@@ -6,23 +6,24 @@
 
 :root {
 	--font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-	--max-width: 640px;
+	--max-width: 620px;
 	--color-text: #111;
-	--color-muted: #666;
-	--color-border: #ddd;
+	--color-muted: #888;
+	--color-border: #e5e5e5;
 	--color-bg: #fff;
+	--color-tag-bg: #f2f2f2;
 }
 
 html {
 	font-family: var(--font);
-	font-size: 16px;
-	line-height: 1.5;
+	font-size: 15px;
+	line-height: 1.6;
 	color: var(--color-text);
 	background: var(--color-bg);
 }
 
 body {
-	padding: 0 1rem;
+	padding: 0 1.25rem;
 }
 
 .site {
@@ -33,8 +34,8 @@ body {
 /* Navigation */
 header {
 	border-bottom: 1px solid var(--color-border);
-	padding: 1rem 0;
-	margin-bottom: 2rem;
+	padding: 1.1rem 0;
+	margin-bottom: 2.5rem;
 }
 
 nav {
@@ -45,8 +46,10 @@ nav {
 }
 
 .site-title {
-	font-weight: 600;
-	font-size: 1rem;
+	font-weight: 700;
+	font-size: 0.9rem;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
 	text-decoration: none;
 	color: var(--color-text);
 	margin-right: auto;
@@ -55,36 +58,65 @@ nav {
 .nav-links {
 	display: flex;
 	align-items: baseline;
-	gap: 1rem;
+	gap: 1.25rem;
 	flex-wrap: wrap;
 }
 
 nav a, .nav-links a {
-	color: var(--color-text);
+	color: var(--color-muted);
 	text-decoration: none;
-	font-size: 0.9rem;
+	font-size: 0.85rem;
 }
 
 nav a:hover, .nav-links a:hover {
-	text-decoration: underline;
+	color: var(--color-text);
+}
+
+/* Nav logout button looks like a link */
+nav button[type="submit"] {
+	background: none;
+	border: none;
+	padding: 0;
+	color: var(--color-muted);
+	font-size: 0.85rem;
+	font-family: var(--font);
+	cursor: pointer;
+}
+
+nav button[type="submit"]:hover {
+	color: var(--color-text);
 }
 
 /* Typography */
 h1 {
-	font-size: 1.4rem;
-	font-weight: 600;
-	margin-bottom: 1.5rem;
+	font-size: 1.5rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	margin-bottom: 0.25rem;
+	line-height: 1.2;
 }
 
 h2 {
-	font-size: 1.1rem;
+	font-size: 0.75rem;
 	font-weight: 600;
-	margin-bottom: 1rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--color-muted);
+	margin-bottom: 0.75rem;
 }
 
 p {
-	margin-bottom: 0.75rem;
+	margin-bottom: 0.5rem;
 	color: var(--color-muted);
+}
+
+a {
+	color: var(--color-text);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 /* Lists */
@@ -99,51 +131,58 @@ form {
 
 label {
 	display: block;
-	font-size: 0.875rem;
-	margin-bottom: 0.25rem;
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	margin-bottom: 0.4rem;
 	color: var(--color-muted);
 }
 
 input, textarea, select {
 	display: block;
 	width: 100%;
-	padding: 0.4rem 0.5rem;
-	border: 1px solid var(--color-border);
+	padding: 0.5rem 0;
+	border: none;
+	border-bottom: 1px solid var(--color-border);
 	border-radius: 0;
 	font-family: var(--font);
 	font-size: 1rem;
 	color: var(--color-text);
-	background: var(--color-bg);
+	background: transparent;
 	appearance: auto;
 }
 
 input:focus, textarea:focus, select:focus {
-	outline: 2px solid var(--color-text);
-	outline-offset: 0;
+	outline: none;
+	border-bottom-color: var(--color-text);
 }
 
 textarea {
 	resize: vertical;
 	min-height: 6rem;
+	padding-top: 0.5rem;
 }
 
 /* Buttons */
 button, .button {
 	display: inline-block;
-	padding: 0.4rem 0.9rem;
+	padding: 0.5rem 1.1rem;
 	border: 1px solid var(--color-text);
 	background: var(--color-text);
 	color: var(--color-bg);
 	font-family: var(--font);
-	font-size: 0.9rem;
+	font-size: 0.875rem;
+	font-weight: 500;
 	cursor: pointer;
 	text-decoration: none;
 	border-radius: 0;
 	line-height: 1.5;
+	letter-spacing: 0.01em;
 }
 
 button:hover, .button:hover {
-	opacity: 0.8;
+	opacity: 0.75;
 }
 
 button.secondary, .button.secondary {
@@ -153,34 +192,57 @@ button.secondary, .button.secondary {
 
 button.danger, .button.danger {
 	background: transparent;
-	color: var(--color-text);
+	color: var(--color-muted);
 	border-color: var(--color-border);
+	font-size: 0.8rem;
+}
+
+/* Inline link-style buttons */
+.link-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	color: var(--color-muted);
 	font-size: 0.85rem;
+	font-family: var(--font);
+	cursor: pointer;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.link-btn:hover {
+	color: var(--color-text);
+	opacity: 1;
 }
 
 /* Form layout */
 .form-group {
-	margin-bottom: 1rem;
+	margin-bottom: 1.5rem;
 }
 
 .form-actions {
-	margin-top: 1.5rem;
+	margin-top: 2rem;
 	display: flex;
-	gap: 0.75rem;
+	gap: 1rem;
 	align-items: center;
 	flex-wrap: wrap;
 }
 
+.form-actions a {
+	font-size: 0.875rem;
+	color: var(--color-muted);
+}
+
 .error {
 	color: #c00;
-	font-size: 0.875rem;
+	font-size: 0.8rem;
 	margin-top: 0.25rem;
 }
 
 .form-error {
 	color: #c00;
-	font-size: 0.875rem;
-	margin-bottom: 1rem;
+	font-size: 0.85rem;
+	margin-bottom: 1.25rem;
 }
 
 /* Concert / venue lists */
@@ -190,12 +252,13 @@ button.danger, .button.danger {
 
 .list-item {
 	border-bottom: 1px solid var(--color-border);
-	padding: 0.75rem 0;
+	padding: 0.9rem 0;
 }
 
 .list-item a {
 	text-decoration: none;
 	color: var(--color-text);
+	font-weight: 500;
 }
 
 .list-item a:hover {
@@ -203,58 +266,60 @@ button.danger, .button.danger {
 }
 
 .list-item .meta {
-	font-size: 0.85rem;
+	font-size: 0.82rem;
 	color: var(--color-muted);
+	margin-top: 0.1rem;
+}
+
+/* Section heading row (h2 + action) */
+.section-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 0.75rem;
 }
 
 /* Detail page */
 .detail-meta {
 	font-size: 0.9rem;
 	color: var(--color-muted);
-	margin-bottom: 1.5rem;
+	margin-bottom: 1.25rem;
+	line-height: 1.7;
 }
 
 .detail-meta p {
-	margin-bottom: 0.25rem;
+	margin-bottom: 0.1rem;
+}
+
+.detail-meta a {
+	color: var(--color-text);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.detail-meta .description {
+	margin-top: 0.75rem;
+	color: var(--color-text);
+	font-size: 0.9rem;
+	line-height: 1.6;
 }
 
 .section {
-	margin-top: 2rem;
-	padding-top: 1.5rem;
+	margin-top: 2.5rem;
+	padding-top: 1.75rem;
 	border-top: 1px solid var(--color-border);
-}
-
-/* Action row */
-.action-row {
-	margin-bottom: 1.5rem;
-	display: flex;
-	gap: 0.75rem;
-	align-items: center;
-	flex-wrap: wrap;
-}
-
-/* Attendance */
-.attendance-status {
-	font-size: 0.9rem;
-	margin-bottom: 1rem;
-}
-
-.attendance-actions {
-	display: flex;
-	gap: 0.5rem;
-	flex-wrap: wrap;
 }
 
 /* Empty state */
 .empty {
 	color: var(--color-muted);
-	font-size: 0.9rem;
-	padding: 0.75rem 0;
+	font-size: 0.875rem;
+	padding: 0.5rem 0;
 }
 
-/* Page sections */
+/* Page header */
 .page-header {
-	margin-bottom: 1.5rem;
+	margin-bottom: 0.5rem;
 	display: flex;
 	align-items: baseline;
 	gap: 1rem;
@@ -265,22 +330,105 @@ button.danger, .button.danger {
 	margin-bottom: 0;
 }
 
-/* Two-column attendee lists */
-.attendee-cols {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 2rem;
-	margin-top: 1rem;
+/* Genre tags */
+.genre-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 1rem 0 1.5rem;
 }
 
-@media (max-width: 400px) {
-	.attendee-cols {
-		grid-template-columns: 1fr;
-	}
+.genre-tag {
+	display: inline-block;
+	padding: 0.15rem 0.6rem;
+	background: var(--color-tag-bg);
+	color: var(--color-muted);
+	font-size: 0.78rem;
+	letter-spacing: 0.03em;
+	border-radius: 2px;
+}
+
+.genre-form {
+	display: inline-flex !important;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.genre-input {
+	display: inline-block !important;
+	width: 10rem !important;
+	padding: 0.15rem 0.4rem !important;
+	border: 1px solid var(--color-border) !important;
+	border-bottom: 1px solid var(--color-border) !important;
+	font-size: 0.78rem !important;
+	color: var(--color-muted) !important;
+	background: transparent !important;
+}
+
+.genre-input::placeholder {
+	color: #bbb;
+}
+
+.genre-input:focus {
+	border-color: var(--color-text) !important;
+	color: var(--color-text) !important;
+	outline: none;
+}
+
+.genre-error {
+	font-size: 0.78rem;
+	color: #c00;
+}
+
+/* Attendance section */
+.attend-section {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 0.5rem;
+}
+
+.attend-btn {
+	/* inherits button styles */
+}
+
+.attend-confirmed {
+	font-size: 0.9rem;
+	font-weight: 500;
+	color: var(--color-text);
+}
+
+/* Attendee list */
+.attendee-list {
+	margin-top: 0.25rem;
 }
 
 .attendee-list li {
 	font-size: 0.9rem;
-	padding: 0.2rem 0;
+	padding: 0.4rem 0;
 	border-bottom: 1px solid var(--color-border);
+}
+
+.attendee-list li:first-child {
+	border-top: 1px solid var(--color-border);
+}
+
+.attendee-list a {
+	color: var(--color-text);
+	text-decoration: none;
+}
+
+.attendee-list a:hover {
+	text-decoration: underline;
+}
+
+/* Action row (for "Ny koncert" type buttons) */
+.action-row {
+	margin-bottom: 1.5rem;
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	flex-wrap: wrap;
 }
