@@ -1,6 +1,6 @@
 import { db } from '$lib/db';
 import { concerts, venues, users, attendances, concertGenres } from '$lib/db/schema';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -122,6 +122,20 @@ export const actions: Actions = {
 			const msg = e instanceof Error ? e.message : '';
 			if (!msg.includes('UNIQUE')) throw e;
 		}
+
+		return {};
+	},
+
+	removeGenre: async ({ params, locals, request }) => {
+		if (!locals.user) redirect(302, '/login');
+
+		const concertId = Number(params.id);
+		const data = await request.formData();
+		const genre = String(data.get('genre') ?? '');
+
+		await db
+			.delete(concertGenres)
+			.where(and(eq(concertGenres.concertId, concertId), eq(concertGenres.genre, genre)));
 
 		return {};
 	}

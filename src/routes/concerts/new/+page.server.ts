@@ -1,6 +1,7 @@
 import { db } from '$lib/db';
 import { concerts, venues } from '$lib/db/schema';
 import { fail, redirect } from '@sveltejs/kit';
+import { copenhagenToUTC } from '$lib/format';
 import type { Actions, PageServerLoad } from './$types';
 
 function isValidUrl(s: string) {
@@ -39,8 +40,8 @@ export const actions: Actions = {
 			return fail(400, { error: 'Billet-URL er ugyldig.', venueId, artistName, dateTime, description, ticketUrl });
 		}
 
-		// Convert local datetime-local input to UTC ISO string
-		const dt = new Date(dateTime).toISOString();
+		// Convert Copenhagen local datetime-local input to UTC ISO string
+		const dt = copenhagenToUTC(dateTime);
 
 		try {
 			const [concert] = await db

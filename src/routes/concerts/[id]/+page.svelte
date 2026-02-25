@@ -32,7 +32,16 @@
 {#if data.genres.length > 0 || data.user}
 	<div class="genre-row">
 		{#each data.genres as genre}
-			<span class="genre-tag">{genre}</span>
+			{#if data.user}
+				<span class="genre-tag genre-tag-removable">
+					{genre}<form method="POST" action="?/removeGenre" use:enhance class="genre-remove-form">
+						<input type="hidden" name="genre" value={genre} />
+						<button type="submit" class="genre-remove-btn" aria-label="Fjern {genre}">×</button>
+					</form>
+				</span>
+			{:else}
+				<span class="genre-tag">{genre}</span>
+			{/if}
 		{/each}
 		{#if data.user}
 			<form method="POST" action="?/addGenre" use:enhance class="genre-form">

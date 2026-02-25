@@ -56,6 +56,6 @@ export const actions: Actions = {
 		const sessionId = await createSession(user.id);
 		setSessionCookie(event, sessionId);
 
-		redirect(302, '/');
+		return {};
 	}
 };

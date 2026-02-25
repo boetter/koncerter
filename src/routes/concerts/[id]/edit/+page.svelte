@@ -1,13 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { utcToCopenhagenInput } from '$lib/format';
 	let { data, form } = $props();
-
-	// datetime-local input expects "YYYY-MM-DDTHH:MM"
-	function toLocalInput(iso: string) {
-		const d = new Date(iso);
-		const pad = (n: number) => String(n).padStart(2, '0');
-		return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
-	}
 
 	const c = $derived(data.concert);
 </script>
@@ -37,7 +31,7 @@
 
 	<div class="form-group">
 		<label for="date_time">Dato og tidspunkt</label>
-		<input id="date_time" name="date_time" type="datetime-local" required value={form?.dateTime ? form.dateTime : toLocalInput(c.dateTime)} />
+		<input id="date_time" name="date_time" type="datetime-local" required value={form?.dateTime ? form.dateTime : utcToCopenhagenInput(c.dateTime)} />
 	</div>
 
 	<div class="form-group">
