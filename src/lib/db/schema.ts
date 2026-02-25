@@ -63,8 +63,25 @@ export const attendances = sqliteTable(
 	(t) => [uniqueIndex('attendances_user_concert_idx').on(t.userId, t.concertId)]
 );
 
+export const concertGenres = sqliteTable(
+	'concert_genres',
+	{
+		id: integer('id').primaryKey({ autoIncrement: true }),
+		concertId: integer('concert_id')
+			.notNull()
+			.references(() => concerts.id, { onDelete: 'cascade' }),
+		genre: text('genre').notNull(),
+		addedBy: integer('added_by')
+			.notNull()
+			.references(() => users.id),
+		createdAt: text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`)
+	},
+	(t) => [uniqueIndex('concert_genres_concert_genre_idx').on(t.concertId, t.genre)]
+);
+
 export type User = typeof users.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
 export type Venue = typeof venues.$inferSelect;
 export type Concert = typeof concerts.$inferSelect;
 export type Attendance = typeof attendances.$inferSelect;
+export type ConcertGenre = typeof concertGenres.$inferSelect;

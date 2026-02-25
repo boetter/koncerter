@@ -1,5 +1,5 @@
 import { db } from '$lib/db';
-import { concerts, venues, users, attendances } from '$lib/db/schema';
+import { concerts, venues, users, attendances, concertGenres } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
@@ -31,13 +31,21 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		? allAttendances.find((a) => a.attendance.userId === locals.user!.id)?.attendance ?? null
 		: null;
 
+	const genres = await db
+		.select({ genre: concertGenres.genre })
+		.from(concertGenres)
+		.where(eq(concertGenres.concertId, id))
+		.orderBy(concertGenres.genre)
+		.all();
+
 	return {
 		concert: row.concert,
 		venue: row.venue,
 		creatorName: row.creatorName,
 		expecting,
 		attended,
-		myAttendance
+		myAttendance,
+		genres: genres.map((g) => g.genre)
 	};
 };
 
@@ -89,6 +97,30 @@ export const actions: Actions = {
 
 		if (mine) {
 			await db.delete(attendances).where(eq(attendances.id, mine.id));
+		}
+
+		return {};
+	},
+
+	addGenre: async ({ params, locals, request }) => {
+		if (!locals.user) redirect(302, '/login');
+
+		const concertId = Number(params.id);
+		const data = await request.formData();
+		const genre = String(data.get('genre') ?? '').trim().toLowerCase();
+
+		if (!genre) return fail(400, { genreError: 'Angiv en genre' });
+		if (genre.length > 30) return fail(400, { genreError: 'Genre må maks. være 30 tegn' });
+
+		try {
+			await db.insert(concertGenres).values({
+				concertId,
+				genre,
+				addedBy: locals.user.id
+			});
+		} catch (e: unknown) {
+			const msg = e instanceof Error ? e.message : '';
+			if (!msg.includes('UNIQUE')) throw e;
 		}
 
 		return {};

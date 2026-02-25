@@ -3,7 +3,7 @@
 	let { data } = $props();
 </script>
 
-<h1>{data.user?.username}</h1>
+<h1>{data.profileUser.username}</h1>
 
 <h2>Skal til ({data.upcoming.length})</h2>
 
