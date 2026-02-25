@@ -34,8 +34,10 @@
 	<ul class="list">
 		{#each concerts as concert}
 			<li class="list-item">
-				<a href="/concerts/{concert.id}">{concert.artistName}</a>
-				<div class="meta">{formatDate(concert.dateTime)}</div>
+				<div class="list-main">
+					<a href="/concerts/{concert.id}">{concert.artistName}</a>
+					<div class="meta">{formatDate(concert.dateTime)}</div>
+				</div>
 			</li>
 		{/each}
 	</ul>

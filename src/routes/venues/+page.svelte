@@ -15,8 +15,10 @@
 	<ul class="list">
 		{#each data.venues as venue}
 			<li class="list-item">
-				<a href="/venues/{venue.id}">{venue.name}</a>
-				<div class="meta">{venue.address} · {venue.concertCount} {venue.concertCount === 1 ? 'koncert' : 'koncerter'}</div>
+				<div class="list-main">
+					<a href="/venues/{venue.id}">{venue.name}</a>
+					<div class="meta">{venue.address} · {venue.concertCount} {venue.concertCount === 1 ? 'koncert' : 'koncerter'}</div>
+				</div>
 			</li>
 		{/each}
 	</ul>

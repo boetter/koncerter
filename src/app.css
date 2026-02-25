@@ -12,6 +12,7 @@
 	--color-border: #e5e5e5;
 	--color-bg: #fff;
 	--color-tag-bg: #f2f2f2;
+	--color-accent: #120a8f;
 }
 
 html {
@@ -111,7 +112,7 @@ p {
 }
 
 a {
-	color: var(--color-text);
+	color: var(--color-accent);
 	text-decoration: none;
 }
 
@@ -170,8 +171,8 @@ textarea {
 button, .button {
 	display: inline-block;
 	padding: 0.5rem 1.1rem;
-	border: 1px solid var(--color-text);
-	background: var(--color-text);
+	border: 1px solid var(--color-accent);
+	background: var(--color-accent);
 	color: var(--color-bg);
 	font-family: var(--font);
 	font-size: 0.875rem;
@@ -189,7 +190,8 @@ button:hover, .button:hover {
 
 button.secondary, .button.secondary {
 	background: transparent;
-	color: var(--color-text);
+	color: var(--color-accent);
+	border-color: var(--color-accent);
 }
 
 button.danger, .button.danger {
@@ -232,7 +234,6 @@ button.danger, .button.danger {
 
 .form-actions a {
 	font-size: 0.875rem;
-	color: var(--color-muted);
 }
 
 .error {
@@ -267,7 +268,6 @@ button.danger, .button.danger {
 
 .list-item a {
 	text-decoration: none;
-	color: var(--color-text);
 	font-weight: 500;
 }
 
@@ -314,7 +314,6 @@ button.danger, .button.danger {
 }
 
 .detail-meta a {
-	color: var(--color-text);
 	text-decoration: underline;
 	text-underline-offset: 2px;
 }
@@ -465,7 +464,6 @@ button.danger, .button.danger {
 }
 
 .attendee-list a {
-	color: var(--color-text);
 	text-decoration: none;
 }
 

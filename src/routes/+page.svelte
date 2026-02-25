@@ -11,8 +11,10 @@
 	<ul class="list">
 		{#each data.upcoming as { concert, venueName }}
 			<li class="list-item">
-				<a href="/concerts/{concert.id}">{concert.artistName}</a>
-				<div class="meta">{formatDate(concert.dateTime)} · <a href="/venues/{concert.venueId}">{venueName}</a></div>
+				<div class="list-main">
+					<a href="/concerts/{concert.id}">{concert.artistName}</a>
+					<div class="meta">{formatDate(concert.dateTime)} · <a href="/venues/{concert.venueId}">{venueName}</a></div>
+				</div>
 			</li>
 		{/each}
 	</ul>
@@ -24,8 +26,10 @@
 		<ul class="list">
 			{#each data.recent as { concert, venueName }}
 				<li class="list-item">
-					<a href="/concerts/{concert.id}">{concert.artistName}</a>
-					<div class="meta">{formatDate(concert.dateTime)} · <a href="/venues/{concert.venueId}">{venueName}</a></div>
+					<div class="list-main">
+						<a href="/concerts/{concert.id}">{concert.artistName}</a>
+						<div class="meta">{formatDate(concert.dateTime)} · <a href="/venues/{concert.venueId}">{venueName}</a></div>
+					</div>
 				</li>
 			{/each}
 		</ul>
