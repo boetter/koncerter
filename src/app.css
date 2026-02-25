@@ -125,7 +125,9 @@ ul, ol {
 }
 
 /* Forms */
-form {
+/* Only apply display:contents where specifically needed (nav logout button)
+   Global display:contents on forms breaks button-form association in Safari */
+nav form {
 	display: contents;
 }
 
