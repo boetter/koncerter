@@ -20,13 +20,13 @@ export const actions: Actions = {
 		const confirm = String(data.get('confirm') ?? '');
 
 		if (!username || !email || !password) {
-			return fail(400, { error: 'Alle felter er påkrævede.' });
+			return fail(400, { error: 'Alle felter er påkrævede.', username, email });
 		}
 		if (password !== confirm) {
-			return fail(400, { error: 'Adgangskoderne stemmer ikke overens.' });
+			return fail(400, { error: 'Adgangskoderne stemmer ikke overens.', username, email });
 		}
 		if (password.length < 8) {
-			return fail(400, { error: 'Adgangskoden skal være mindst 8 tegn.' });
+			return fail(400, { error: 'Adgangskoden skal være mindst 8 tegn.', username, email });
 		}
 
 		const existing = await db
@@ -35,7 +35,7 @@ export const actions: Actions = {
 			.where(eq(users.email, email))
 			.get();
 		if (existing) {
-			return fail(400, { error: 'E-mailadressen er allerede i brug.' });
+			return fail(400, { error: 'E-mailadressen er allerede i brug.', username, email });
 		}
 
 		const existingUsername = await db
@@ -44,7 +44,7 @@ export const actions: Actions = {
 			.where(eq(users.username, username))
 			.get();
 		if (existingUsername) {
-			return fail(400, { error: 'Brugernavnet er allerede taget.' });
+			return fail(400, { error: 'Brugernavnet er allerede taget.', username, email });
 		}
 
 		const passwordHash = await bcrypt.hash(password, 12);
@@ -56,6 +56,6 @@ export const actions: Actions = {
 		const sessionId = await createSession(user.id);
 		setSessionCookie(event, sessionId);
 
-		return {};
+		redirect(302, '/');
 	}
 };

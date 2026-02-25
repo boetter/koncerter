@@ -18,22 +18,22 @@ export const actions: Actions = {
 		const password = String(data.get('password') ?? '');
 
 		if (!email || !password) {
-			return fail(400, { error: 'Udfyld e-mail og adgangskode.' });
+			return fail(400, { error: 'Udfyld e-mail og adgangskode.', email });
 		}
 
 		const user = await db.select().from(users).where(eq(users.email, email)).get();
 		if (!user) {
-			return fail(400, { error: 'Forkert e-mail eller adgangskode.' });
+			return fail(400, { error: 'Forkert e-mail eller adgangskode.', email });
 		}
 
 		const valid = await bcrypt.compare(password, user.passwordHash);
 		if (!valid) {
-			return fail(400, { error: 'Forkert e-mail eller adgangskode.' });
+			return fail(400, { error: 'Forkert e-mail eller adgangskode.', email });
 		}
 
 		const sessionId = await createSession(user.id);
 		setSessionCookie(event, sessionId);
 
-		return {};
+		redirect(302, '/');
 	}
 };
