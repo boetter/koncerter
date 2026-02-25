@@ -2,6 +2,7 @@ import { db } from '$lib/db';
 import { concerts, venues } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { fail, redirect, error } from '@sveltejs/kit';
+import { copenhagenToUTC } from '$lib/format';
 import type { Actions, PageServerLoad } from './$types';
 
 function isValidUrl(s: string) {
@@ -47,7 +48,7 @@ export const actions: Actions = {
 			return fail(400, { error: 'Billet-URL er ugyldig.', venueId, artistName, dateTime, description, ticketUrl });
 		}
 
-		const dt = new Date(dateTime).toISOString();
+		const dt = copenhagenToUTC(dateTime);
 
 		try {
 			await db

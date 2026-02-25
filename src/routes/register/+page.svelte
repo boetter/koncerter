@@ -1,11 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	let { form } = $props();
 </script>
 
 <h1>Opret konto</h1>
 
-<form method="POST" use:enhance>
+<form method="POST" use:enhance={() => async ({ result, update }) => {
+	if (result.type === 'success') {
+		goto('/');
+	} else {
+		await update();
+	}
+}}>
 	{#if form?.error}
 		<p class="form-error">{form.error}</p>
 	{/if}
